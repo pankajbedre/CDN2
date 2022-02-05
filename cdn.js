@@ -1,21 +1,20 @@
 var iframe = document.getElementById("myIframe");
-//       var iframe_height = "auto";
-      function changeStuff(iframe_color,iframe_height) {
+      function changeStuff(iframe_color, iframe_height, autoHeight) {
         const doc = iframe.contentWindow;
         const obj = { background: iframe_color };
         setTimeout(() => {
           doc.postMessage(obj, "*");
         }, 100);
 
-        if (iframe_height == "auto") {
+        if (autoHeight) {
           window.addEventListener(
             "message",
             function (e) {
-              iframe.style.height = e.data.height;
+              iframe.style.height = e.data + 'px';
             },
             false
           );
         } else {
-          iframe.style.height = iframe_height;
+          iframe.style.height = iframe_height + 'px';
         }
       }
